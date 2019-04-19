@@ -13,39 +13,27 @@ RUN install.r Cairo
 
 ENV RSERVE_HOME /opt/rserve
 
-RUN addgroup --gid 1042 wg
-RUN useradd -G 1042 -u 1001 rserve \
+RUN useradd -g docker rserve \
 	&& mkdir ${RSERVE_HOME} \
 	&& usermod -d ${RSERVE_HOME} rserve
 
-RUN usermod -a -G 1000 rserve
+RUN mkdir ${RSERVE_HOME}/work
 
 COPY etc ${RSERVE_HOME}/etc
 
-# DON'T DO THIS
-RUN echo 'rserve\nrserve\n' > /opt/rserve/etc/Rserv.pwd
-
-RUN chown -R rserve:1000 ${RSERVE_HOME}
-
 COPY run_rserve.sh ${RSERVE_HOME}/bin/
 
-RUN chmod -R 775 ${RSERVE_HOME}
+RUN chown -R rserve ${RSERVE_HOME} \
+	&& chmod -R 775 ${RSERVE_HOME}
 
-RUN mkdir /volumes \
-	&& mkdir /volumes/data \
-	&& chown -R :1000 /volumes/data/
-RUN mkdir /volumes/reports_temp \
-	&& chown -R :1000 /volumes/reports_temp/
-RUN chmod -R 775 /volumes
+VOLUME ["/volumes/data"]
+VOLUME ["/volumes/reports_temp"]
 
 USER rserve
 
 ## Change username and provide PASSWORD
 ENV USERNAME ${USERNAME:-rserve}
-
 ENV PASSWORD ${PASSWORD:-rserve}
-
-RUN mkdir ${RSERVE_HOME}/work
 
 EXPOSE 6311
 
