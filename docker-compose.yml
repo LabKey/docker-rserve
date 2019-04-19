@@ -8,6 +8,9 @@ services:
   rserve:
     build:
       context: .
+      args:
+        - CATALINA_HOME=$CATALINA_HOME
+        - LABKEY_HOME=$LABKEY_HOME
     image: labkey/rserve
     ports:
       - "6311:6311"
@@ -20,8 +23,3 @@ services:
         - rserve
     env_file:
       - "compose${AUTH_ENV_LOCAL}.env"
-
-environment:
-  - CATALINA_HOME=$CATALINA_HOME
-  - LABKEY_HOME=$LABKEY_HOME
-  
