@@ -24,3 +24,4 @@ services:
 environment:
   - CATALINA_HOME=$CATALINA_HOME
   - LABKEY_HOME=$LABKEY_HOME
+  
