@@ -1,11 +1,6 @@
 ---
 version: '2'
 
-# Building on the DOI network: When building this container, you must set your environment
-# variable "doi_network" to "true" so SSL certificates may be installed.
-#
-# Ex: $ doi_network="true" docker-compose build
-
 networks:
   rservenet:
 
@@ -13,14 +8,19 @@ services:
   rserve:
     build:
       context: .
-      args:
-        - doi_network=$doi_network
-    image: usgs/rserve
+    image: labkey/rserve
     ports:
       - "6311:6311"
+    volumes:
+      - "$CATALINA_HOME/temp/reports_temp:/volumes/reports_temp"
+      - "$LABKEY_HOME/build/deploy/files:/volumes/data"
     networks:
       rservenet:
         aliases:
         - rserve
     env_file:
       - "compose${AUTH_ENV_LOCAL}.env"
+
+environment:
+  - CATALINA_HOME=$CATALINA_HOME
+  - LABKEY_HOME=$LABKEY_HOME
