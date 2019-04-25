@@ -13,23 +13,16 @@ RUN install.r Cairo
 
 ENV RSERVE_HOME /opt/rserve
 
-RUN useradd -g docker rserve \
-	&& mkdir ${RSERVE_HOME} \
-	&& usermod -d ${RSERVE_HOME} rserve
-
-RUN mkdir ${RSERVE_HOME}/work
+RUN mkdir -p ${RSERVE_HOME}/work
 
 COPY etc ${RSERVE_HOME}/etc
 
 COPY run_rserve.sh ${RSERVE_HOME}/bin/
 
-RUN chown -R rserve ${RSERVE_HOME} \
-	&& chmod -R 775 ${RSERVE_HOME}
+RUN chmod -R 777 ${RSERVE_HOME}
 
 VOLUME ["/volumes/data"]
 VOLUME ["/volumes/reports_temp"]
-
-USER rserve
 
 ## Change username and provide PASSWORD
 ENV USERNAME ${USERNAME:-rserve}

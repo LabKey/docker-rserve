@@ -1,17 +1,15 @@
 ---
-version: '2'
+version: '3.2'
 
 networks:
   rservenet:
 
 services:
   rserve:
-    build:
+    build: 
       context: .
-      args:
-        - CATALINA_HOME=$CATALINA_HOME
-        - LABKEY_HOME=$LABKEY_HOME
     image: labkey/rserve
+    user: "${UID:-0}:${GID:-0}"
     ports:
       - "6311:6311"
     volumes:
