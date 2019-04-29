@@ -13,7 +13,7 @@ services:
     ports:
       - "6311:6311"
     volumes:
-      - "$CATALINA_HOME/temp/reports_temp:/volumes/reports_temp"
+      - "$CATALINA_HOME:/volumes/catalina_home"
       - "$LABKEY_HOME/build/deploy/files:/volumes/data"
     networks:
       rservenet:

@@ -21,9 +21,6 @@ COPY run_rserve.sh ${RSERVE_HOME}/bin/
 
 RUN chmod -R 777 ${RSERVE_HOME}
 
-VOLUME ["/volumes/data"]
-VOLUME ["/volumes/reports_temp"]
-
 ## Change username and provide PASSWORD
 ENV USERNAME ${USERNAME:-rserve}
 ENV PASSWORD ${PASSWORD:-rserve}

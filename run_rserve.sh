@@ -5,11 +5,6 @@ if [[ -z "${PASSWORD}" ]]; then
 	exit 1
 fi
 
-if [[! -w /volumes/data ] || [! -w /volumes/reports_temp ]]; then
-	echo "Mapped volumes must exist and be writable"
-	exit 1
-fi
-
 echo "${USERNAME} ${PASSWORD}" > ${RSERVE_HOME}/etc/Rserv.pwd
 
 CONFIG_PATH=${RSERVE_HOME}/etc/Rserv.conf
