@@ -1,4 +1,4 @@
-FROM r-base:3.4.3
+FROM r-base:3.6.3
 
 MAINTAINER Ian Sigmon <ians@labkey.com>
 
