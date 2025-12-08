@@ -1,9 +1,7 @@
 #!/bin/bash 
 
-if [[ -z "${PASSWORD}" ]]; then
-	echo "Must provide env PASSWORD"
-	exit 1
-fi
+USERNAME=${USERNAME:-rserve}
+PASSWORD=${PASSWORD:-rserve}
 
 echo "${USERNAME} ${PASSWORD}" > ${RSERVE_HOME}/etc/Rserv.pwd
 

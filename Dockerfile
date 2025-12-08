@@ -1,6 +1,7 @@
-FROM r-base:3.6.3
+ARG VERSION=4.5.2
+FROM r-base:${VERSION}
 
-MAINTAINER Ian Sigmon <ians@labkey.com>
+LABEL maintainer="LabKey - labkey.org"
 
 RUN apt-get update \
 	&& apt-get install -y telnet \
@@ -11,7 +12,7 @@ RUN install.r Rserve \
 	&& rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 RUN install.r Cairo
 
-ENV RSERVE_HOME /opt/rserve
+ENV RSERVE_HOME=/opt/rserve
 
 RUN mkdir -p ${RSERVE_HOME}/work
 
@@ -23,10 +24,6 @@ RUN chmod -R 777 ${RSERVE_HOME}
 
 VOLUME ["/volumes/data"]
 VOLUME ["/volumes/catalina_home"]
-
-## Change username and provide PASSWORD
-ENV USERNAME ${USERNAME:-rserve}
-ENV PASSWORD ${PASSWORD:-rserve}
 
 EXPOSE 6311
 

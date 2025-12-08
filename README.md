@@ -7,7 +7,7 @@ docker run -it -d -p 6311:6311 \
 	-u 1000:1042 \
 	-e USERNAME=rserve -e PASSWORD=rserve \
 	--rm \
-	--name rserve usgs/rserve
+	--name rserve labkey/rserve
 ```
 The two volumes are the paths needed by the LabKey reports, and are the mappings supplied to the configured engine
 The readme below is copied from the original RServe container repo.
@@ -21,11 +21,11 @@ Docker Compose: edit the compose.env file to add your own username and password 
 
 If using plain Docker, the simplest way to run is:
 
-`docker run -p 6311:6311 usgs/rserve[:TAG]`
+`docker run -p 6311:6311 labkey/rserve[:TAG]`
 
 If you wish to use your own username and password:
 
-`docker run  -e USERNAME=<username> -e PASSWORD=<password> -p 6311:6311 usgs/rserve`
+`docker run  -e USERNAME=<username> -e PASSWORD=<password> -p 6311:6311 labkey/rserve`
 
 The RServe Docker container provides its services on the exposed port `6311`.
 
